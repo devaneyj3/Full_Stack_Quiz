@@ -2,8 +2,23 @@ const express = require('express');
 
 const routes = express.Router();
 
-routes.get('/', (req, res) => {
-    res.status(200).send('Teacher Route is working');
+const helper = require('./helperFunctions');
+
+const db = require('../data/db-config');
+
+//get all teachers
+routes.get('/', async(req, res) => {
+    const getTeachers = await db('teachers');
+    try {
+        if (getTeachers.length > 0) {
+            res.status(200).send(getTeachers);
+        } else {
+            res.status(404).json({ message: "There are no teachers" });
+        }
+    }
+    catch {
+        helper.dbError(res)
+    }
 })
 
 // routes.post('/', (req, res) => {
