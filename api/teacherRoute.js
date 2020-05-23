@@ -4,11 +4,13 @@ const routes = express.Router();
 
 const helper = require('./helperFunctions');
 
-const db = require('../data/db-config');
+const teacherDB = require('./dbQuery');
+
+const teacherMW = require('./middleware/teachersMW');
 
 //get all teachers
 routes.get('/', async(req, res) => {
-    const getTeachers = await db('teachers');
+    const getTeachers = await teacherDB.getAll('teachers');
     try {
         if (getTeachers.length > 0) {
             res.status(200).send(getTeachers);
@@ -20,14 +22,42 @@ routes.get('/', async(req, res) => {
         helper.dbError(res)
     }
 })
+    // GET teacher by ID
+routes.get('/:id', teacherMW.validateID, async(req, res) => {
+    const paramsID = helper.getIDFromParams(req);
+    try {
+        const teacherByID = await teacherDB.getByID('teachers', paramsID);
+         res.status(201).send(teacherByID)
+        
+    } catch {
+        helper.dbError(res)
+    }
+})
 
-// routes.post('/', (req, res) => {
-//     res.status(201).send(stuff)
-// })
-
-// routes.delete('/', (req, res) => {
-//     res.status(204).send(stuff)
-// })
+    // POST a new teacher
+routes.post('/', teacherMW.validateTeacherData, async (req, res) => {
+    //fields must be unique
+    const unq = true
+    try {
+        await teacherDB.insert('teachers', req.body);
+        res.status(201).send(req.body)
+        
+    } catch {
+        helper.dbError(res, unq)
+    }
+ })
+ //delete a teacher
+routes.delete('/:id', teacherMW.validateID, async(req, res) => {
+    const paramsID = helper.getIDFromParams(req);
+    try {
+        const deleteTeacher = await teacherDB.remove('teachers', paramsID);
+        console.log(deleteTeacher)
+        res.status(201).json({ message: `You have deleted id ${paramsID}` })
+        
+    } catch {
+        helper.dbError(res)
+    }
+})
 
 // routes.put('/', (req, res) => {
 //     res.status(200).send(stuff)
