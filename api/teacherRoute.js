@@ -58,9 +58,16 @@ routes.delete('/:id', teacherMW.validateID, async(req, res) => {
         helper.dbError(res)
     }
 })
-
-// routes.put('/', (req, res) => {
-//     res.status(200).send(stuff)
-// })
+    //Edit a teacher based on ID
+routes.put('/:id', teacherMW.validateID, teacherMW.validateTeacherData, async(req, res) => {
+    const paramsID = helper.getIDFromParams(req);
+    await teacherDB.edit('teachers', paramsID, req.body);
+    try {
+        res.status(201).send(req.body)
+        
+    } catch {
+        helper.dbError(res)
+    }
+})
 
 module.exports = routes;

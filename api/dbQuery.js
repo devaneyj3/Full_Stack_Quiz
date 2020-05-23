@@ -21,10 +21,16 @@ async function remove(text, id) {
     return deleteByID;
 }
 
+async function edit(text, id, changes) {
+    const editByID = await db(text).where({ id }).update({ name: changes.name, username: changes.username, email: changes.email, password: changes.password, class: changes.class });
+    return editByID;
+}
+
 
 module.exports = {
     getAll,
     getByID,
     insert,
     remove,
+    edit
 }

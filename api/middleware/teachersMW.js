@@ -15,7 +15,10 @@ async function validateTeacherData(req, res, next) {
     if (Object.keys(req.body).length < 1) {
         res.status(400).json({
             message: "Missing data fields"})
-    } else {
+    } else if (req.body.name === '' || req.body.username === '' || req.body.email === '' || req.body.password === '' || req.body.class === '') {
+        res.status(400).json({message: 'You put text in every field'})
+    }
+    else {
         next()
     }
 }
