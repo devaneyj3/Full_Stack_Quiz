@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import "./Teachers.scss";
 import { teacherContext } from "../../Context/Context";
 import Teacher from "../Teacher/Teacher";
+import { edit } from "../../Axios/axiosMethods";
 
 const Teachers = () => {
   const data = useContext(teacherContext);
@@ -14,9 +15,13 @@ const Teachers = () => {
           return (
             <Teacher
               key={teacher.id}
+              id={teacher.id}
               name={teacher.name}
+              username={teacher.username}
               email={teacher.email}
+              password={teacher.password}
               class={teacher.class}
+              edit={edit}
             />
           );
         })}

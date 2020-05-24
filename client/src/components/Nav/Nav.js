@@ -5,7 +5,7 @@ import './Nav.scss';
 const Nav = () => {
    return(
        <section className='Nav'>
-           <nav>
+           <nav className="Nav-Elements">
                <NavLink to='/teachers'>Teachers</NavLink> 
                <NavLink to='/students'>Students</NavLink>
                <NavLink to='/quizes'>Quizes</NavLink>

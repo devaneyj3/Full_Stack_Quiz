@@ -5,6 +5,7 @@ import { Route } from "react-router-dom";
 import Teachers from "../components/Teachers/Teachers";
 import { teacherContext } from "../Context/Context";
 import { getTeachers } from "../Axios/axiosMethods";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [data, setData] = useState([]);
@@ -18,7 +19,7 @@ function App() {
     <div className="app-container">
       <Nav />
       students quizes
-      <teacherContext.Provider value={{ data, message }}>
+      <teacherContext.Provider value={{ data, message, setData, setMessage }}>
         <Route exact path="/" />
         <Route exact path="/teachers" component={Teachers} />
       </teacherContext.Provider>
