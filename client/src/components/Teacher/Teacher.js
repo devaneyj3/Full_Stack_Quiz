@@ -70,7 +70,7 @@ const Teacher = (props) => {
           <Button color="primary" onClick={editingMode}>
             Edit
           </Button>
-          <Button color="danger">Delete</Button>
+          <Button color="danger" onClick={props.deleteEntry}>Delete</Button>
         </>
       )}
     </section>

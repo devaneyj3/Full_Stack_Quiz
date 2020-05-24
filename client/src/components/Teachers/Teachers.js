@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "./Teachers.scss";
 import { teacherContext } from "../../Context/Context";
 import Teacher from "../Teacher/Teacher";
-import { edit } from "../../Axios/axiosMethods";
+import { edit, deleteEntry  } from "../../Axios/axiosMethods";
 
 const Teachers = () => {
   const data = useContext(teacherContext);
@@ -21,7 +21,8 @@ const Teachers = () => {
               email={teacher.email}
               password={teacher.password}
               class={teacher.class}
-              edit={edit}
+                  edit={edit}
+                  deleteEntry={() => deleteEntry(teacher.id, data.data, data.setData)}
             />
           );
         })}

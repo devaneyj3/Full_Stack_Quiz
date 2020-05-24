@@ -20,3 +20,16 @@ export const edit = async (data, setData, id, changes) => {
     console.log(error.response.data.message);
   }
 };
+
+export const deleteEntry = async (id, data, setData) => {
+    try {
+        await axiosInstance.delete(`teachers/${id}`);
+        const filteredEntry = data.filter(entry => entry.id !== id);
+        setData(filteredEntry)
+        
+    } catch (error) {
+        console.log(error.response.data.message);
+    }
+
+
+}
