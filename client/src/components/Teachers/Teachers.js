@@ -16,8 +16,8 @@ const Teachers = () => {
   };
 
   return (
-    <>
-      { data.data.length === 0 ? (
+    <div className="info-container">
+      {data.data.length === 0 ? (
         <Alert color="danger">{data.message}</Alert>
       ) : null}
       <h1>Here is a list of all the teachers</h1>
@@ -41,7 +41,7 @@ const Teachers = () => {
           );
         })}
       </section>
-    </>
+    </div>
   );
 };
 

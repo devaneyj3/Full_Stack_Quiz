@@ -1,0 +1,12 @@
+$margin: 5%;
+
+@mixin info-container {
+    margin: $margin
+}
+
+@mixin flexWrapList {
+    margin: $margin;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

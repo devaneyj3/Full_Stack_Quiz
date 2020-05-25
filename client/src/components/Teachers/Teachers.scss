@@ -1,6 +1,8 @@
-.Teachers {
-    margin: 5%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+@import '../../scss/mixins.scss';
+.info-container {
+    @include info-container;
+     .Teachers {
+       @include flexWrapList;
+    }
+
 }

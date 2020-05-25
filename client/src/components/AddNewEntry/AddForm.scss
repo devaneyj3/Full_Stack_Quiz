@@ -1,0 +1,5 @@
+@import '../../scss/mixins';
+
+.form-container {
+    @include info-container;
+}
