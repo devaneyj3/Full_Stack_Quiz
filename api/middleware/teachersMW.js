@@ -16,7 +16,7 @@ async function validateTeacherData(req, res, next) {
         res.status(400).json({
             message: "Missing data fields"})
     } else if (req.body.name === '' || req.body.username === '' || req.body.email === '' || req.body.password === '' || req.body.class === '') {
-        res.status(400).json({message: 'You put text in every field'})
+        res.status(400).json({message: 'You need text in every field'})
     }
     else {
         next()

@@ -6,6 +6,7 @@ import Teachers from "../components/Teachers/Teachers";
 import { teacherContext } from "../Context/Context";
 import { getTeachers } from "../Axios/axiosMethods";
 import "bootstrap/dist/css/bootstrap.min.css";
+import AddNewEntry from "../components/AddNewEntry/AddForm";
 
 function App() {
   const [data, setData] = useState([]);
@@ -22,6 +23,8 @@ function App() {
       <teacherContext.Provider value={{ data, message, setData, setMessage }}>
         <Route exact path="/" />
         <Route exact path="/teachers" component={Teachers} />
+        <Route exact path="/newTeacher" component={AddNewEntry} />
+
       </teacherContext.Provider>
     </div>
   );

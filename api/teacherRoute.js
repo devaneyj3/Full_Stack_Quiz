@@ -50,8 +50,7 @@ routes.post('/', teacherMW.validateTeacherData, async (req, res) => {
 routes.delete('/:id', teacherMW.validateID, async(req, res) => {
     const paramsID = helper.getIDFromParams(req);
     try {
-        const deleteTeacher = await teacherDB.remove('teachers', paramsID);
-        console.log(deleteTeacher)
+        await teacherDB.remove('teachers', paramsID);
         res.status(201).json({ message: `You have deleted id ${paramsID}` })
         
     } catch {
