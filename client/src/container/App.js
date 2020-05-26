@@ -7,10 +7,12 @@ import { teacherContext } from "../Context/Context";
 import { getTeachers } from "../Axios/axiosMethods";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AddNewEntry from "../components/AddNewEntry/AddForm";
+import Admin from '../components/Admin/Admin';
 
 function App() {
   const [data, setData] = useState([]);
   const [message, setMessage] = useState("");
+  const [adminMode, setAdminMode] = useState(false);
 
   useEffect(() => {
     getTeachers(setData, setMessage);
@@ -18,12 +20,15 @@ function App() {
 
   return (
     <div className="app-container">
+      <teacherContext.Provider value={{
+        data, message, setData, setMessage, adminMode, setAdminMode
+      }}>
       <Nav />
       students quizes
-      <teacherContext.Provider value={{ data, message, setData, setMessage }}>
         <Route exact path="/" />
         <Route exact path="/teachers" component={Teachers} />
         <Route exact path="/newTeacher" component={AddNewEntry} />
+        <Route path='/admin-login' component={Admin}/>
 
       </teacherContext.Provider>
     </div>

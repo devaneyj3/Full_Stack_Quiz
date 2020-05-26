@@ -70,12 +70,13 @@ const Teacher = (props) => {
           </Button>
         ) : (
           <>
-            <Button color="primary" onClick={editingMode}>
-              Edit
+              {data.adminMode ?
+                <><Button color="primary" onClick={editingMode}>
+                Edit
             </Button>
             <Button color="danger" onClick={() => deleteEntry(props.id, data.data, data.setData)}>
-              Delete
-            </Button>
+                  Delete
+            </Button></>: null}
           </>
         )}
       </section>

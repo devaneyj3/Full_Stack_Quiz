@@ -1,4 +1,13 @@
-const helper = require('../helperFunctions')
+const helper = require('../helperFunctions'); 
+
+async function validateAdmin (req, res, next) { 
+    if (req.body.username === 'devaneyj3' && req.body.password === 'Lambda'){
+        next()
+    }
+        else {
+        res.status(400).json({message: "You entered the wrong admin credentials"})
+    }
+}
 
 async function validateID (req, res, next) { 
     const { id } = req.params;
@@ -26,5 +35,6 @@ async function validateTeacherData(req, res, next) {
 
 module.exports = {
     validateID,
-    validateTeacherData
+    validateTeacherData,
+    validateAdmin
 }
