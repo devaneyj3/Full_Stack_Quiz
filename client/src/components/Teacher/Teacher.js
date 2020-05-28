@@ -3,6 +3,7 @@ import "./Teacher.scss";
 import { Button, Alert } from "reactstrap";
 import { teacherContext } from "../../Context/Context";
 import { edit, deleteEntry } from "../../Axios/axiosMethods";
+import { useHistory } from "react-router-dom";
 const Teacher = (props) => {
   const [isEditing, setIsEditing] = useState(false);
   const [info, setInfo] = useState({
@@ -17,6 +18,8 @@ const Teacher = (props) => {
 
   const data = useContext(teacherContext);
 
+  const history = useHistory();
+
   const editingMode = () => {
     setIsEditing(true);
   };
@@ -29,6 +32,10 @@ const Teacher = (props) => {
   const change = (e) => {
     setInfo({ ...info, [e.target.name]: e.target.value });
   };
+
+  const goToTeacherPage = ( id)  => {
+    history.push(`/teacher/${id}`)
+  }
   return (
     <>
       <section className="Teacher">
@@ -58,11 +65,11 @@ const Teacher = (props) => {
             />
           </>
         ) : (
-          <>
+          <div className='teacher-box' onClick={() => goToTeacherPage( props.id)}>
             <h1>{props.name}</h1>
             <h1>{props.email}</h1>
             <h1>{props.class}</h1>
-          </>
+          </div>
         )}
         {isEditing ? (
           <Button color="success" onClick={save}>

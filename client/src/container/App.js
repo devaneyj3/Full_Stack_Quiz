@@ -8,6 +8,7 @@ import { getTeachers } from "../Axios/axiosMethods";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AddNewEntry from "../components/AddNewEntry/AddForm";
 import Admin from '../components/Admin/Admin';
+import TeacherPage from '../components/Teacher_Page/Teacher_Page';
 
 function App() {
   const [data, setData] = useState([]);
@@ -28,7 +29,8 @@ function App() {
         <Route exact path="/" />
         <Route exact path="/teachers" component={Teachers} />
         <Route exact path="/newTeacher" component={AddNewEntry} />
-        <Route path='/admin-login' component={Admin}/>
+        <Route path='/admin-login' component={Admin} />
+        <Route exact path='/teacher/:id' component={TeacherPage} />
 
       </teacherContext.Provider>
     </div>
