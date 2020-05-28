@@ -33,7 +33,8 @@ const Teacher = (props) => {
     setInfo({ ...info, [e.target.name]: e.target.value });
   };
 
-  const goToTeacherPage = ( id)  => {
+  const goToTeacherPage = (id) => {
+    console.log('going to teaachetr page')
     history.push(`/teacher/${id}`)
   }
   return (

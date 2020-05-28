@@ -34,6 +34,20 @@ routes.get('/:id', teacherMW.validateID, async(req, res) => {
     }
 })
 
+//GET Quizes by Teacher ID
+routes.get('/:id/quizes', teacherMW.validateID, async(req, res) => {
+    const paramsID = helper.getIDFromParams(req);
+    try {
+        const teacherByID = await teacherDB.getQuizByTeacherID(paramsID);
+        console.log(teacherByID)
+         res.status(201).send(teacherByID)
+        
+    } catch {
+        helper.dbError(res)
+    }
+})
+
+
     // POST a new teacher
 routes.post('/', teacherMW.validateTeacherData, async (req, res) => {
     //fields must be unique

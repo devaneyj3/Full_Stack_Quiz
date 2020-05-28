@@ -31,6 +31,15 @@ export const edit = async (data, setData, setMessage, id, changes) => {
   }
 };
 
+ export const getByID = async (setElement, id) => {
+  const elementByID = await axiosInstance.get(`teachers/${id}`)
+    try {
+    setElement(elementByID.data);
+  } catch (error) {
+      console.log(error.response.data.reason);
+  }
+}
+
 export const deleteEntry = async (id, data, setData) => {
   try {
     await axiosInstance.delete(`teachers/${id}`);

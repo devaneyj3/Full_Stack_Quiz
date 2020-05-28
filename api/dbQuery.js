@@ -26,11 +26,20 @@ async function edit(text, id, changes) {
     return editByID;
 }
 
+async function getQuizByTeacherID(id) {
+    const teacherID = await getByID('teachers', id) 
+    if (teacherID) {
+        return db('quizes')
+    }
+    return teacherID;
+}
+
 
 module.exports = {
     getAll,
     getByID,
     insert,
     remove,
-    edit
+    edit,
+    getQuizByTeacherID
 }
