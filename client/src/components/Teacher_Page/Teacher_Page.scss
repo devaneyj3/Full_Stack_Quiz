@@ -1,0 +1,7 @@
+@import '../../scss/mixins.scss';
+.TeacherData {
+    @include info-container;
+     .TeacherPage {
+        @include flexWrapList;
+    }
+}

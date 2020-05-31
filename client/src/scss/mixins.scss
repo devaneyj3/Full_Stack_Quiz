@@ -10,3 +10,11 @@ $margin: 5%;
     flex-wrap: wrap;
     justify-content: center;
 }
+@mixin InfoBox {
+    border: 1px groove black;
+    margin: 3%;
+    padding: 3%;
+    border-radius: 1em;
+    box-shadow: 5px 10px grey;
+    background-color: beige;
+}

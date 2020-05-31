@@ -49,3 +49,13 @@ export const deleteEntry = async (id, data, setData) => {
     console.log(error.response.data.message);
   }
 };
+
+export const getQuizesByTeacherId = async (id, setData) => {
+  try {
+    const quizes = await axiosInstance.get(`teachers/${id}/quizes`)
+    ;
+    setData(quizes.data);
+  } catch (error) {
+    console.log(error.response.data.message);
+  }
+}

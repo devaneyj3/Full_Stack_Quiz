@@ -34,7 +34,6 @@ const Teacher = (props) => {
   };
 
   const goToTeacherPage = (id) => {
-    console.log('going to teaachetr page')
     history.push(`/teacher/${id}`)
   }
   return (

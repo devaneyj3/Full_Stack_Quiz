@@ -2,7 +2,7 @@
 .info-container {
     @include info-container;
      .Teachers {
-       @include flexWrapList;
+        @include flexWrapList;
     }
 
 }
