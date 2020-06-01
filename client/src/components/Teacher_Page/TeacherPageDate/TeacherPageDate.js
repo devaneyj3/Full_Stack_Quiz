@@ -4,6 +4,7 @@ import './TeacherPageDate.scss';
 const TeacherPageData = (props) => {
 
     const [quizes, setQuizes] = useState([]);
+    console.log(quizes)
 
     useEffect(() => {
         getQuizesByTeacherId(props.id, setQuizes)

@@ -29,7 +29,10 @@ async function edit(text, id, changes) {
 async function getQuizByTeacherID(id) {
     const teacherID = await getByID('teachers', id) 
     if (teacherID) {
-        return db('quizes')
+        return db('quizes as q')
+            .join('teachers as t', 'q.teacher_id', 't.id')
+            .where('q.teacher_id', id)
+            .select('t.class', 'q.name', 'q.teacher_id')
     }
     return teacherID;
 }

@@ -44,6 +44,7 @@ export const deleteEntry = async (id, data, setData) => {
   try {
     await axiosInstance.delete(`teachers/${id}`);
     const filteredEntry = data.filter((entry) => entry.id !== id);
+    console.log(id)
     setData(filteredEntry);
   } catch (error) {
     console.log(error.response.data.message);

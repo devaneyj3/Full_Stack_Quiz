@@ -4,14 +4,15 @@ import { Button, Alert } from "reactstrap";
 import { teacherContext } from "../../Context/Context";
 import { edit, deleteEntry } from "../../Axios/axiosMethods";
 import { useHistory } from "react-router-dom";
+import ReusableForm from "../reusableForm";
 const Teacher = (props) => {
   const [isEditing, setIsEditing] = useState(false);
   const [info, setInfo] = useState({
     id: props.id,
     name: "",
-    username: props.username,
+    username: '',
     email: "",
-    password: props.password,
+    password: '',
     class: "",
   });
   const [message, setMessage] = useState("");
@@ -29,10 +30,6 @@ const Teacher = (props) => {
     setIsEditing(false);
   };
 
-  const change = (e) => {
-    setInfo({ ...info, [e.target.name]: e.target.value });
-  };
-
   const goToTeacherPage = (id) => {
     history.push(`/teacher/${id}`)
   }
@@ -41,28 +38,7 @@ const Teacher = (props) => {
       <section className="Teacher">
         {isEditing ? (
           <>
-            {message ? <Alert color="danger">{message}</Alert> : null}
-            <input
-              type="text"
-              onChange={change}
-              name="name"
-              value={info.name}
-              placeholder={props.name}
-            />
-            <input
-              type="email"
-              onChange={change}
-              name="email"
-              value={info.email}
-              placeholder={props.email}
-            />
-            <input
-              type="text"
-              onChange={change}
-              name="class"
-              value={info.class}
-              placeholder={props.class}
-            />
+            <ReusableForm entry={info} set={setInfo} submit={save} text='Save' message={message}/>
           </>
         ) : (
           <div className='teacher-box' onClick={() => goToTeacherPage( props.id)}>
@@ -72,9 +48,7 @@ const Teacher = (props) => {
           </div>
         )}
         {isEditing ? (
-          <Button color="success" onClick={save}>
-            Save
-          </Button>
+          null
         ) : (
           <>
               {data.adminMode ?

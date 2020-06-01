@@ -17,7 +17,7 @@ const Teachers = () => {
 
   return (
     <div className="info-container">
-      {data.data.length === 0 ? (
+      {data.data.length < 1 ? (
         <Alert color="danger">{data.message}</Alert>
       ) : null}
       <h1>Here is a list of all the teachers</h1>
