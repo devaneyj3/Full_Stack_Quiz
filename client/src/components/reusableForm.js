@@ -1,4 +1,7 @@
-import React from 'react';
+import React, {useContext} from "react";
+import { addEntry } from "../Axios/axiosMethods";
+import { teacherContext } from "../Context/Context";
+import { useHistory } from "react-router-dom";
 import {
     Label,
     Alert,
@@ -10,16 +13,37 @@ import {
     Input,
 } from "reactstrap";
 
-const ReusableForm = ({entry, set, submit, text, message}) => {
-
+const ReusableForm = ({ entry, set, text, message, setMessage, options, save }) => {
+    console.log(save)
+    
+    const data = useContext(teacherContext);
+  
+    const history = useHistory();
     const change = (e) => {
         set({ ...entry, [e.target.name]: e.target.value });
     };
 
+
+  const submitForm = (e) => {
+      e.preventDefault();
+      if (options) {
+          addEntry(data.data, entry, data.setData, setMessage);
+          set({ name: "", username: "", email: "", password: "", class: "" });
+          setTimeout(() => {
+              history.goBack();
+          }, 2000);
+      }
+      else if (save) {
+          save()
+          
+          }
+      
+  };
+
     return (
         <>
             {message ? <Alert color="info">{message}</Alert> : null}
-            <Form onSubmit={submit}>
+            <Form onSubmit={submitForm}>
                 <Row form>
                     <Col md={6}>
                         <FormGroup>

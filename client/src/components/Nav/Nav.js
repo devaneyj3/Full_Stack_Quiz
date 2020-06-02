@@ -17,7 +17,6 @@ const Nav = () => {
          {data.adminMode ? <Button onClick={LogOut}>Admin Logout</Button>: <NavLink to='/admin-login'>Admin Login</NavLink>}
           <NavLink to='/teachers'>Teachers</NavLink> 
           <NavLink to='/students'>Students</NavLink>
-          <NavLink to='/quizes'>Quizes</NavLink>
       </nav>
     </section>
   )

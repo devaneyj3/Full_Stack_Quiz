@@ -38,7 +38,7 @@ const Teacher = (props) => {
       <section className="Teacher">
         {isEditing ? (
           <>
-            <ReusableForm entry={info} set={setInfo} submit={save} text='Save' message={message}/>
+            <ReusableForm entry={info} set={setInfo} text='Save' message={message} setMessage={setMessage} save={() => save()}/>
           </>
         ) : (
           <div className='teacher-box' onClick={() => goToTeacherPage( props.id)}>
