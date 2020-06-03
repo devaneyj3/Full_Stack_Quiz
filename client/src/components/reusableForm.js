@@ -1,5 +1,5 @@
-import React, {useContext} from "react";
-import { addEntry } from "../Axios/axiosMethods";
+import React, { useContext } from "react";
+import { addData } from "../Axios/axiosMethods";
 import { teacherContext } from "../Context/Context";
 import { useHistory } from "react-router-dom";
 import {
@@ -13,32 +13,32 @@ import {
     Input,
 } from "reactstrap";
 
-const ReusableForm = ({ entry, set, text, message, setMessage, options, save }) => {
+const ReusableForm = ({FormName, entry, set, text, message, setMessage, options, save }) => {
     console.log(save)
-    
+
     const data = useContext(teacherContext);
-  
+
     const history = useHistory();
     const change = (e) => {
         set({ ...entry, [e.target.name]: e.target.value });
     };
 
 
-  const submitForm = (e) => {
-      e.preventDefault();
-      if (options) {
-          addEntry(data.data, entry, data.setData, setMessage);
-          set({ name: "", username: "", email: "", password: "", class: "" });
-          setTimeout(() => {
-              history.goBack();
-          }, 2000);
-      }
-      else if (save) {
-          save()
-          
-          }
-      
-  };
+    const submitForm = (e) => {
+        e.preventDefault();
+        if (options) {
+            addData('teachers',data.data, entry, data.setData, setMessage);
+            set({ name: "", username: "", email: "", password: "", class: "" });
+            setTimeout(() => {
+                history.goBack();
+            }, 2000);
+        }
+        else if (save) {
+            save()
+
+        }
+
+    };
 
     return (
         <>
@@ -80,7 +80,6 @@ const ReusableForm = ({ entry, set, text, message, setMessage, options, save }) 
                                 type="email"
                                 name="email"
                                 id="email"
-                                placeholder="Email"
                                 onChange={change}
                                 value={entry.email}
                                 placeholder="Email"
@@ -94,7 +93,6 @@ const ReusableForm = ({ entry, set, text, message, setMessage, options, save }) 
                                 type="password"
                                 name="password"
                                 id="password"
-                                placeholder="Password"
                                 onChange={change}
                                 value={entry.password}
                                 placeholder="Password"
@@ -128,7 +126,7 @@ const ReusableForm = ({ entry, set, text, message, setMessage, options, save }) 
                             entry.class === "" ? true : false)
                     }
                 >
-                 {text}   
+                    {text}
                 </Button>
             </Form>
         </>

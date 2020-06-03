@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import "./Teacher.scss";
-import { Button, Alert } from "reactstrap";
+import { Button } from "reactstrap";
 import { teacherContext } from "../../Context/Context";
 import { edit, deleteEntry } from "../../Axios/axiosMethods";
 import { useHistory } from "react-router-dom";

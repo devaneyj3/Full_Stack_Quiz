@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getByID } from '../../Axios/axiosMethods';
-import TeacherPageData from './TeacherPageDate/TeacherPageDate';
+import TeacherPageData from './TeacherPageData/TeacherPageData';
 import './Teacher_Page.scss';
 const TeacherPage = (props) => {
     const [data, setData] = useState([]);

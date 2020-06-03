@@ -4,11 +4,11 @@ import Nav from "../components/Nav/Nav";
 import { Route, Redirect } from "react-router-dom";
 import Teachers from "../components/Teachers/Teachers";
 import { teacherContext } from "../Context/Context";
-import { getTeachers } from "../Axios/axiosMethods";
+import { get } from "../Axios/axiosMethods";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AddNewEntry from "../components/AddNewEntry/AddForm";
 import Admin from '../components/Admin/Admin';
-import TeacherPage from '../components/Teacher_Page/Teacher_Page';
+import TeacherPage from '../Pages/Teacher_Page/Teacher_Page';
 import Quiz from "../components/Quiz/quiz";
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
   const [adminMode, setAdminMode] = useState(false);
 
   useEffect(() => {
-    getTeachers(setData, setMessage);
+    get('teachers', setData, setMessage);
   }, []);
 
   return (

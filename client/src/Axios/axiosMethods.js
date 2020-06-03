@@ -1,17 +1,18 @@
 import axiosInstance from "./axiosInstance";
 
-export const getTeachers = async (setData, setMessage) => {
+export const get = async (dbName, setData, setMessage) => {
   try {
-    const teachers = await axiosInstance.get("teachers");
-    setData(teachers.data);
+    const response = await axiosInstance.get(dbName);
+
+    setData(response.data);
   } catch (error) {
     setMessage(error.response.data.message);
   }
 };
 
-export const addEntry = async (data, newEntry, setData, setMessage) => {
+export const addData = async (dbname, data, newEntry, setData, setMessage) => {
   try {
-    await axiosInstance.post("teachers", newEntry);
+    await axiosInstance.post(dbname, newEntry);
     setData([...data, newEntry]);
     setMessage("Info submitted. Redirecting...");
   } catch (error) {
@@ -50,13 +51,3 @@ export const deleteEntry = async (id, data, setData) => {
     console.log(error.response.data.message);
   }
 };
-
-export const getQuizesByTeacherId = async (id, setData) => {
-  try {
-    const quizes = await axiosInstance.get(`teachers/${id}/quizes`)
-    ;
-    setData(quizes.data);
-  } catch (error) {
-    console.log(error.response.data.message);
-  }
-}

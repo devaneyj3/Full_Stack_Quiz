@@ -8,7 +8,18 @@ const bd = require('./dbQuery');
 
 const teacherMW = require('./middleware/teachersMW');
 
-//get all teachers
+//get all quizes
+quizRoutes.get('/', async (req, res) => {
+    const getQuizes = await bd.getAll('quizes');
+    try {
+
+        res.status(200).send(getQuizes);
+    }
+    catch {
+        helper.dbError(res)
+    }
+})
+//post a quiz
 quizRoutes.post('/', async (req, res) => {
     const addQuiz = await bd.insert('quizes', req.body);
     try {
