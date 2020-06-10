@@ -6,10 +6,25 @@ const helper = require('./helperFunctions');
 
 const db = require('./dbQuery');
 
-const token = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 
 //get all admin
+routes.post('/', async(req, res) => {
+    const credentials = req.body;
+    const unq = true
+
+    //use bcrypt to hash password
+    const hash = bcrypt.hashSync(credentials.password, 10)
+    credentials.password = hash;
+
+    try {
+        await db.insert('admin', credentials)
+        res.status(201).send(credentials)  
+    } catch  {
+        helper.dbError(res, unq)
+    }
+})
 routes.get('/', async (req, res) => {
     const getAdmin = await db.getAll('admin');
     try {
