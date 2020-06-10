@@ -10,7 +10,7 @@ const bcrypt = require('bcrypt');
 
 
 //get all admin
-routes.post('/', async(req, res) => {
+routes.post('/', async (req, res) => {
     const credentials = req.body;
     const unq = true
 
@@ -20,7 +20,7 @@ routes.post('/', async(req, res) => {
 
     try {
         await db.insert('admin', credentials)
-        res.status(201).send(credentials)  
+        res.status(201).send(credentials)
     } catch  {
         helper.dbError(res, unq)
     }
@@ -40,16 +40,16 @@ routes.get('/', async (req, res) => {
 })
 //log in as admin
 routes.post('/login', async (req, res) => {
-    const { username, password } = req.body;
-    const admin = await db.getAdmin(username);
+    const credentials = req.body;
+    const admin = await db.getAdmin(credentials.username);
     try {
 
-      // make json web token
-        if (admin.password === password) {
+        // make json web token and log in by checking hash password
+        if (admin && !bcrypt.compareSync(credentials.password, admin.password)) {
+            res.status(404).json({ message: 'Invalid Credentials' })
+        } else if (bcrypt.compareSync(credentials.password, admin.password)) {
             const authToken = helper.generateToken(admin)
             res.status(200).json({ message: 'You are logged in', data: admin, authToken });
-        } else if (admin.password !== password) {
-            res.status(404).json({ message: 'Invalid Credentials' })
         }
         else {
             helper.NotInDatabase(res, 'admin', null, username)
