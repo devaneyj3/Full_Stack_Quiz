@@ -12,7 +12,7 @@ async function getByID(text, paramsID) {
 }
 
 async function insert(text, changes) {
-    const getByID = await db(text).insert( changes );
+    const getByID = await db(text).insert(changes);
     return getByID;
 }
 
@@ -27,7 +27,7 @@ async function edit(text, id, changes) {
 }
 
 async function getQuizByTeacherID(id) {
-    const teacherID = await getByID('teachers', id) 
+    const teacherID = await getByID('teachers', id)
     if (teacherID) {
         return db('quizes as q')
             .join('teachers as t', 'q.teacher_id', 't.id')
@@ -35,6 +35,10 @@ async function getQuizByTeacherID(id) {
             .select('t.class', 'q.name', 'q.teacher_id')
     }
     return teacherID;
+}
+async function getAdmin(username) {
+    const getByUser = await db('admin').where({ 'username': username }).first();
+    return getByUser;
 }
 
 
@@ -44,5 +48,6 @@ module.exports = {
     insert,
     remove,
     edit,
-    getQuizByTeacherID
+    getQuizByTeacherID,
+    getAdmin
 }

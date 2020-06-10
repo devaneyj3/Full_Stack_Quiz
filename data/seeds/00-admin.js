@@ -1,11 +1,11 @@
 
 exports.seed = function(knex) {
   // Deletes ALL existing entries
-  return knex('quizes').truncate()
+  return knex('admin').truncate()
     .then(function () {
       // Inserts seed entries
-      return knex('quizes').insert([
-        {id: 1, name: 'Biology', teacher_id: 2},
+      return knex('admin').insert([
+        {id: 1, username: 'devaneyj3', password: '123admin'},
       ]);
     });
 };
